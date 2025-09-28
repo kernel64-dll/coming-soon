@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Unregistered Domain</title>
+  <style>
+    html,body {
+      margin:0;
+      height:100%;
+      width:100%;
+      overflow:hidden;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:#f8fafc;
+    }
+    #bg {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+    }
+    .card {
+      position:relative;
+      z-index:1;
+      background:rgba(0,0,0,0.6);
+      border-radius:16px;
+      padding:40px 32px;
+      max-width:480px;
+      text-align:center;
+      margin:auto;
+      top:50%;
+      transform:translateY(-50%);
+      box-shadow:0 8px 24px rgba(0,0,0,0.4);
+    }
+    h1 {
+      font-size:24px;
+      margin:0 0 12px;
+      font-weight:600;
+      word-break:break-word;
+    }
+    p {
+      margin:0 0 24px;
+      color:#cbd5e1;
+      font-size:16px;
+    }
+    a {
+      display:inline-block;
+      padding:12px 20px;
+      border-radius:16px;
+      background:#6366f1;
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      transition:background 0.2s ease;
+    }
+    a:hover {
+      background:#4f46e5;
+    }
+  </style>
+</head>
+<body>
+  <div id="bg"></div>
+  <div class="card">
+    <h1><div id="domain">Kernel's Arcade</div></h1>
+    <p>Coming soon... i need a vps again..</p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+  <script>
+    VANTA.GLOBE({
+      el: "#bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x217228,
+      color2: 0x9ad47d,
+      backgroundColor: 0x153c35
+    })
+  </script>
+</body>
+</html>
