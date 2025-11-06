@@ -1,91 +1,137 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Kernel's Arcade.</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TheStatesman — Politics & Policy</title>
+  <meta name="description" content="TheStatesman: independent political news, analysis, and opinion. Coverage of national politics, policy, elections, and governance." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    html,body {
-      margin:0;
-      height:100%;
-      width:100%;
-      overflow:hidden;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      color:#f8fafc;
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#e63946;
+      --accent-2:#f77f00;
+      --glass: rgba(255,255,255,0.03);
+      --max-width:1200px;
+      color-scheme: dark;
     }
-    #bg {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      z-index:0;
-    }
-    .card {
-      position:relative;
-      z-index:1;
-      background:rgba(0,0,0,0.6);
-      border-radius:16px;
-      padding:40px 32px;
-      max-width:480px;
-      text-align:center;
-      margin:auto;
-      top:50%;
-      transform:translateY(-50%);
-      box-shadow:0 8px 24px rgba(0,0,0,0.4);
-    }
-    h1 {
-      font-size:24px;
-      margin:0 0 12px;
-      font-weight:600;
-      word-break:break-word;
-    }
-    p {
-      margin:0 0 24px;
-      color:#cbd5e1;
-      font-size:16px;
-    }
-    a {
-      display:inline-block;
-      padding:12px 20px;
-      border-radius:16px;
-      background:#6366f1;
-      color:#fff;
-      text-decoration:none;
-      font-weight:600;
-      transition:background 0.2s ease;
-    }
-    a:hover {
-      background:#4f46e5;
-    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial;color:#e6eef6;background:linear-gradient(180deg,#071026 0%, var(--bg) 100%);}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max-width);margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#ffb703);font-weight:800;color:white;font-size:18px}
+    .site-title{font-size:18px;font-weight:700;letter-spacing:0.4px}
+    .site-tag{font-size:12px;color:var(--muted)}
+    nav{margin-left:auto;display:flex;gap:16px;align-items:center}
+    nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:var(--muted)}
+    nav a:hover{background:var(--glass);color:var(--accent)}
+    .search{position:relative}
+    .search input{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;color:inherit;min-width:160px}
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:24px;margin-top:28px}
+    .hero-card{background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border-radius:12px;overflow:hidden;padding:18px;border:1px solid rgba(255,255,255,0.03)}
+    .hero-image{height:320px;background:url('https://images.unsplash.com/photo-1542224566-54c2a7a2d8d6?q=80&w=1600&auto=format&fit=crop') center/cover;border-radius:10px}
+    .kicker{display:inline-block;padding:6px 10px;background:rgba(255,255,255,0.03);border-radius:999px;font-weight:700;font-size:12px;color:var(--accent)}
+    .headline{font-size:24px;margin:12px 0 8px;font-weight:800}
+    .deck{color:var(--muted);line-height:1.4}
+    .meta{font-size:12px;color:var(--muted);margin-top:12px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+    .card{background:var(--card);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+    .card h3{margin:10px 0 6px;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:13px}
+    aside{background:transparent}
+    .sidebar .widget{background:var(--card);padding:14px;border-radius:10px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.02)}
+    footer{margin-top:36px;padding:22px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted);font-size:13px}
+    @media (max-width:980px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.main-grid{grid-template-columns:1fr}}
+    @media (max-width:560px){nav{display:none}.grid{grid-template-columns:1fr}.logo{width:44px;height:44px;font-size:14px}.headline{font-size:20px}.hero-image{height:200px}}
   </style>
 </head>
 <body>
-  <div id="bg"></div>
-  <div class="card">
-    <h1><div id="domain">Kernel's Arcade</div></h1>
-    <p>Coming soon... fuck solo </3 fucking weirdo</p>
-    <p>itsover2.frogiesarcade.win</p>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">TS</div>
+        <div>
+          <div class="site-title">TheStatesman</div>
+          <div class="site-tag">Politics • Policy • Opinion</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">National</a>
+        <a href="#">Elections</a>
+        <a href="#">Policy</a>
+        <a href="#">Opinion</a>
+      </nav>
+      <div class="search"><input placeholder="Search..." /></div>
+    </header>
+
+    <section class="hero">
+      <article class="hero-card">
+        <span class="kicker">Breaking</span>
+        <div class="hero-image"></div>
+        <h2 class="headline">Lawmakers reach tentative deal on spending bill</h2>
+        <p class="deck">A last-minute consensus moves through committee after hours of negotiation — the package would fund government operations and include changes to education and health spending.</p>
+        <div class="meta">By <strong>Alex Monroe</strong> • Nov 5, 2025</div>
+      </article>
+
+      <aside class="sidebar">
+        <div class="widget">
+          <h4>Trending</h4>
+          <p>1. Supreme Court deliberations</p>
+          <p>2. Midterm analysis</p>
+          <p>3. Climate policy summit</p>
+        </div>
+        <div class="widget">
+          <h4>Newsletter</h4>
+          <p>Daily political briefings — delivered to your inbox.</p>
+          <input type="email" placeholder="you@domain.com" />
+        </div>
+        <div class="widget">
+          <h4>From Other Outlets</h4>
+          <div id="fox-feed">Loading Fox News Politics...</div>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>
+          <strong>TheStatesman</strong>
+          <div class="muted small">Independent reporting on politics and policy.</div>
+        </div>
+        <div class="muted small">© 2025 TheStatesman</div>
+      </div>
+    </footer>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
- <script>
-  VANTA.GLOBE({
-    el: "#bg",
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    scale: 1.00,
-    scaleMobile: 1.00,
-    color: 0xffff00,      
-    color2: 0xffcc00,     
-    backgroundColor: 0x1a1a1a 
-  })
-</script>
-
+  <script>
+  async function loadFoxNews(){
+    const feedUrl = "https://feeds.foxnews.com/foxnews/politics";
+    const api = "https://api.allorigins.win/get?url=" + encodeURIComponent(feedUrl);
+    try {
+      const res = await fetch(api);
+      const data = await res.json();
+      const xml = new DOMParser().parseFromString(data.contents, "text/xml");
+      const items = xml.querySelectorAll("item");
+      const container = document.getElementById("fox-feed");
+      container.innerHTML = "<ul style='padding-left:18px;margin:0'>";
+      items.forEach((item, i)=>{
+        if(i>=5)return;
+        const title=item.querySelector("title").textContent;
+        const link=item.querySelector("link").textContent;
+        container.innerHTML += `<li><a href='${link}' target='_blank'>${title}</a></li>`;
+      });
+      container.innerHTML += "</ul>";
+    } catch(e){
+      document.getElementById("fox-feed").innerText = "Could not load Fox News feed.";
+    }
+  }
+  loadFoxNews();
   </script>
 </body>
 </html>
