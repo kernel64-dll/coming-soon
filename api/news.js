@@ -33,25 +33,21 @@ async function fetchFeed(feed) {
 }
 
 export default async function handler(req, res) {
-  const sourceId = req.query.source;
+  const sourceId = req.query.source || null;
 
   try {
-    const selectedFeeds = feeds.filter((f) =>
-      sourceId ? f.id === sourceId : true
-    );
+    const active = feeds.filter((f) => !sourceId || f.id === sourceId);
+    const result = await Promise.all(active.map(fetchFeed));
 
-    const result = await Promise.all(selectedFeeds.map(fetchFeed));
-    const articles = result.flat().sort(
-      (a, b) =>
-        new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)
-    );
+    const articles = result
+      .flat()
+      .sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
 
     res.status(200).json({
       articles,
-      lastUpdated: Date.now(),
+      lastUpdated: Date.now()
     });
   } catch (err) {
-    console.error("API error:", err.message);
-    res.status(500).json({ error: "Failed to load news" });
+    res.status(500).json({ error: "Failed to load news", details: err.message });
   }
 }
