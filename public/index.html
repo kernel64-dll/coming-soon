@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Statesman</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-title">The Statesman</span>
+      <span class="brand-tagline">Independent. Live. Global.</span>
+    </div>
+    <div class="live-indicator">
+      <span class="live-dot"></span>
+      <span>Live Updates</span>
+    </div>
+  </header>
+
+  <nav class="top-nav">
+    <div class="nav-left">
+      <button class="nav-btn nav-btn-active" data-source="all">All Sources</button>
+      <div id="feed-filters" class="feed-filters"></div>
+    </div>
+    <div class="nav-right">
+      <span id="last-updated" class="last-updated">Last updated: —</span>
+    </div>
+  </nav>
+
+  <main class="layout">
+    <section class="main-content">
+      <h2 class="section-title">Top Stories</h2>
+      <div id="lead-article" class="lead-article"></div>
+
+      <h3 class="section-subtitle">More Headlines</h3>
+      <div id="news-grid" class="news-grid"></div>
+
+      <div class="status-message" id="status-message"></div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h3>Sources</h3>
+        <ul id="sources-list" class="sources-list"></ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Auto Refresh</h3>
+        <p>News refreshes every <strong>3 minutes</strong> while this page is open.</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> The Statesman. Aggregated news from permitted channels via RSS.</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
