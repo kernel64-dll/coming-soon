@@ -20,7 +20,6 @@ const feeds = [
   }
 ];
 
-// no server memory → can't cache globally (use 1 request per refresh)
 async function fetchFeed(feed) {
   const data = await parser.parseURL(feed.url);
   return data.items.map((item) => ({
@@ -37,13 +36,14 @@ export default async function handler(req, res) {
   const sourceId = req.query.source;
 
   try {
-    const activeFeeds = feeds.filter((f) => !sourceId || f.id === sourceId);
+    const selectedFeeds = feeds.filter((f) =>
+      sourceId ? f.id === sourceId : true
+    );
 
-    const results = await Promise.all(activeFeeds.map(fetchFeed));
-    let articles = results.flat();
-
-    articles.sort(
-      (a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)
+    const result = await Promise.all(selectedFeeds.map(fetchFeed));
+    const articles = result.flat().sort(
+      (a, b) =>
+        new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0)
     );
 
     res.status(200).json({
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
       lastUpdated: Date.now(),
     });
   } catch (err) {
-    console.error(err);
+    console.error("API error:", err.message);
     res.status(500).json({ error: "Failed to load news" });
   }
 }
